@@ -13,7 +13,9 @@ function App() {
     // file is the name of the request parameter
     // file is the state variable  that holds 
     // event.target.file[0] from <input type= "file" .../> on line 67
-    formData.append('file', file);
+    formData.append('image', file);
+    formData.append('name', name);
+    formData.append('Category', name)
         const options = {
           method: 'POST',
           body: formData,
@@ -22,26 +24,6 @@ function App() {
         let response = await fetch('/images/save', options);
         console.log('this is the response', response)
 
-
-    // need to send the photo to the db
-    // let response = await fetch("/images/save", {
-    //   method: "post",
-    //   // headers: { "Content-Type": "image/png" },
-    //   body: Buffer,
-    // });
-    // console.log("this is buffer", Buffer)
-
-    // let data = await response.json();
-    // // Should be reaponse.blob() or response.arrayBuffer()?
-    // let message = JSON.stringify(data);
-
-    // if (response.status === 200) {
-    //   //let data = await response.json()
-    //   return message;
-    // } else {
-    //   //throw new Error(error)
-    //   throw new Error(message);
-    // }
   };
 
   return (
@@ -67,17 +49,17 @@ function App() {
           />
         </div>
 
-        {/* <div>
-          <label htmlFor="desc">Image Description</label>
+        <div>
+          <label htmlFor="category">Image Category</label>
           <textarea
-            id="desc"
-            name="desc"
-            value={desc}
+            id="cat"
+            name="category"
+            value={name}
             rows="2"
-            placeholder="Description"
+            placeholder="Category"
             required 
           ></textarea>
-        </div> */}
+        </div>
         <div>
           <label htmlFor="image">Upload Image</label>
           <input

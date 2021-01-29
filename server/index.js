@@ -10,8 +10,10 @@ var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 
+
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
+		console.log('cb is: ', cb)
 		cb(null, 'uploads')
 	},
 	filename: (req, file, cb) => {
@@ -62,8 +64,16 @@ app.post('/images/save', upload.single('image'), (req, res, next) => {
 	});
 });
 
-app.listen('3000' || process.env.PORT, err => {
-	if (err)
-		throw err
-	console.log('Server started')
-})
+app.use(function (err, req, res, next) {
+	console.log('This is the invalid field ->', err.field)
+	next(err)
+  })
+
+// app.listen('3000' || process.env.PORT, err => {
+// 	if (err)
+// 		throw err
+// 	console.log('Server started')
+// })
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}...`));
