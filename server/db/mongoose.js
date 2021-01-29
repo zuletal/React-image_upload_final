@@ -6,3 +6,5 @@ mongoose.connect('mongodb+srv://Liliana:BSrhhxBUT5499zvH@cluster0.hicow.mongodb.
 	{ useNewUrlParser: true, useUnifiedTopology: true }, err => {
 		console.log('connected to mongodb')
 	});
+
+	module.exports = mongoose

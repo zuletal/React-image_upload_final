@@ -8,24 +8,40 @@ function App() {
   const send = async (event) => {
     event.preventDefault();
     console.log(name);
+
+    const formData = new FormData();
+    // file is the name of the request parameter
+    // file is the state variable  that holds 
+    // event.target.file[0] from <input type= "file" .../> on line 67
+    formData.append('file', file);
+        const options = {
+          method: 'POST',
+          body: formData,
+        };
+        
+        let response = await fetch('/images/save', options);
+        console.log('this is the response', response)
+
+
     // need to send the photo to the db
-    let response = await fetch("/images/save", {
-      method: "post",
-      // headers: { "Content-Type": "image/png" },
-      body: Buffer,
-    });
+    // let response = await fetch("/images/save", {
+    //   method: "post",
+    //   // headers: { "Content-Type": "image/png" },
+    //   body: Buffer,
+    // });
+    // console.log("this is buffer", Buffer)
 
-    let data = await response.json();
-    // Should be reaponse.blob() or response.arrayBuffer()?
-    let message = JSON.stringify(data);
+    // let data = await response.json();
+    // // Should be reaponse.blob() or response.arrayBuffer()?
+    // let message = JSON.stringify(data);
 
-    if (response.status === 200) {
-      //let data = await response.json()
-      return message;
-    } else {
-      //throw new Error(error)
-      throw new Error(message);
-    }
+    // if (response.status === 200) {
+    //   //let data = await response.json()
+    //   return message;
+    // } else {
+    //   //throw new Error(error)
+    //   throw new Error(message);
+    // }
   };
 
   return (
@@ -33,7 +49,7 @@ function App() {
       style={{ width: "100vw", height: "100vh" }}
       className="d-flex justify-content-center align-items-center flex-column"
     >
-      <form action="/" method="POST" encType="multipart/form-data">
+      <form action="/images/save" method="POST" encType="multipart/form-data">
         <div>
           <label htmlFor="name">Image Title</label>
           <input

@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 //Uploading the image
 app.post('/images/save', upload.single('image'), (req, res, next) => {
 	console.info('the req.body is', req.body)
+	console.log('the req.file is:', req.file)
 	var obj = {
 		name: req.body.name,
 		desc: req.body.desc,
